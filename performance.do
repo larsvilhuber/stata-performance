@@ -1,4 +1,6 @@
+// https://stackoverflow.com/questions/7924702/looking-for-a-sample-program-to-test-stata-mp
 set more off
+cap set processors 8
 clear*
 set rmsg on
 global size 10000000
