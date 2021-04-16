@@ -1,16 +1,24 @@
 clear*
 set rmsg on
-set obs 10000000
-forval n = 1/5 {
+global size 10000000
+global dims 5
+global reps 200
+
+set obs     $size
+forval n = 1/$dims {
 g i`n' = runiform()
 }
 g dv = rbinomial(1,.3)
 memory
 
+// r; m=logit
 qui logit dv i*
-
+// r; m=xtmixed
 qui xtmixed dv i*
 
 *with bootstrap:
-qui bs, reps(2000): logit dv i*
+// r; m=bootstrap
+qui bs, reps($reps): logit dv i*
+
+exit, clear
 
