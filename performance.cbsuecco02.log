@@ -1,0 +1,108 @@
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     MP - Parallel Edition            College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+8-user 8-core Stata network perpetual license:
+       Serial number:  501406244326
+         Licensed to:  ECCO Cornell University
+                       Ithaca, NY
+
+Notes:
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  More than 2 billion observations are allowed; see help obs_advice.
+      4.  Maximum number of variables is set to 5000; see help set_maxvar.
+
+
+running /usr/local/stata14/profile.do ...
+
+. do performance.do 
+
+. set more off
+
+. cap set processors 8
+
+. clear*
+
+. set rmsg on
+r; t=0.00 8:37:53
+
+. global size 10000000
+r; t=0.00 8:37:53
+
+. global dims 5
+r; t=0.00 8:37:53
+
+. global reps 200
+r; t=0.00 8:37:53
+
+. 
+. set obs     $size
+number of observations (_N) was 0, now 10,000,000
+r; t=0.15 8:37:53
+
+. forval n = 1/$dims {
+  2. g i`n' = runiform()
+  3. }
+r; t=4.48 8:37:58
+
+. g dv = rbinomial(1,.3)
+r; t=1.49 8:37:59
+
+. memory
+
+  Memory usage
+  ------------
+                                            used                allocated
+    ---------------------------------------------------------------------
+    data                             240,000,000              301,989,888
+    strLs                                      0                        0
+    ---------------------------------------------------------------------
+    data & strLs                     240,000,000              301,989,888
+
+    ---------------------------------------------------------------------
+    data & strLs                     240,000,000              301,989,888
+    var. names, %fmts, ...                 1,940                   64,600
+    overhead                          21,004,344               21,005,080
+
+    Stata matrices                             0                        0
+    ado-files                              2,947                    2,947
+    stored results                             0                        0
+
+    Mata matrices                              0                        0
+    Mata functions                             0                        0
+
+    set maxvar usage                   4,626,519                4,626,519
+
+    other                                  3,343                    3,343
+    ---------------------------------------------------------------------
+    grand total                      265,635,369              327,692,377
+r; t=0.00 8:37:59
+
+. 
+. // r; m=logit
+. qui logit dv i*
+r; t=8.34 8:38:08
+
+. // r; m=xtmixed
+. qui xtmixed dv i*
+r; t=39.49 8:38:47
+
+. 
+. *with bootstrap:
+. // r; m=bootstrap
+. qui bs, reps($reps): logit dv i*
+r; t=4611.27 9:55:39
+
+. 
+. exit, clear
+
+end of do-file
+r; t=0.00 9:55:39
