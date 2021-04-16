@@ -1,3 +1,4 @@
+set more off
 clear*
 set rmsg on
 global size 10000000
