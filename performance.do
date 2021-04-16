@@ -1,3 +1,4 @@
+set more off
 clear*
 set rmsg on
 set obs 10000000
