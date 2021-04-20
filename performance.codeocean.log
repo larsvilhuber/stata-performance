@@ -1,0 +1,90 @@
++ stata-mp -q do performance.do
+. do performance.do 
+
+. // https://stackoverflow.com/questions/7924702/looking-for-a-sample-program-t
+> o-test-stata-mp
+. set more off
+
+. cap set processors 8
+
+. clear*
+
+. set rmsg on
+r; t=0.00 0:41:47
+
+. global size 10000000
+r; t=0.00 0:41:47
+
+. global dims 5
+r; t=0.00 0:41:47
+
+. global reps 200
+r; t=0.00 0:41:47
+
+. 
+. set obs     $size
+number of observations (_N) was 0, now 10,000,000
+r; t=0.01 0:41:47
+
+. forval n = 1/$dims {
+  2. g i`n' = runiform()
+  3. }
+r; t=1.70 0:41:49
+
+. g dv = rbinomial(1,.3)
+r; t=0.63 0:41:50
+
+. memory
+
+  Memory usage
+  ------------
+                                            used                allocated
+    ---------------------------------------------------------------------
+    data                             240,000,000              301,989,888
+    strLs                                      0                        0
+    ---------------------------------------------------------------------
+    data & strLs                     240,000,000              301,989,888
+
+    ---------------------------------------------------------------------
+    data & strLs                     240,000,000              301,989,888
+    var. names, %fmts, ...                 1,954                   65,000
+    overhead                          21,004,344               21,005,080
+
+    Stata matrices                             0                        0
+    ado-files                              3,263                    3,263
+    stored results                             0                        0
+
+    Mata matrices                              0                        0
+    Mata functions                             0                        0
+
+    set maxvar usage                   4,636,521                4,636,521
+
+    other                                  3,377                    3,377
+    ---------------------------------------------------------------------
+    grand total                      265,645,643              327,703,129
+r; t=0.00 0:41:50
+
+. 
+. // r; m=logit
+. qui logit dv i*
+r; t=5.20 0:41:55
+
+. // r; m=xtmixed
+. qui xtmixed dv i*
+r; t=21.14 0:42:16
+
+. 
+. *with bootstrap:
+. // r; m=bootstrap
+. qui bs, reps($reps): logit dv i*
+r; t=3126.27 1:34:22
+
+. 
+. exit, clear
+
+end of do-file
+
+r; t=0.00 1:34:22
+
+
+. 
