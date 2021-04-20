@@ -5,6 +5,8 @@
 - cbsuecco02: Intel(R) Xeon(R) CPU E7- 8837  @ 2.67GHz
 - cbsuecco08: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
 - codeocean: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
+- rsch102: ?
+- rsch105: ?
 
 ## Results
 ```
@@ -22,4 +24,10 @@ performance.docker-vm-redcloud.log:r; t=4203.65 13:42:15
 --
 performance.workstation.log:. // r; m=bootstrap
 performance.workstation.log:r; t=3246.66 9:27:02
+--
+performance.rsch102.log:. // r; m=bootstrap
+performance.rsch102.log:r; t=7627.19 23:51:30
+--
+performance.rsch105.log:. // r; m=bootstrap
+performance.rsch105.log:r; t=9326.60 0:08:50
 ```

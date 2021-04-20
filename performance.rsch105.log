@@ -1,0 +1,91 @@
+Run not in batch mode on server rsch105
+
+------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  U:/Documents/AEA_Workspace/performance.log
+  log type:  text
+ opened on:  19 Apr 2021, 21:32:14
+
+. 
+. set more off
+
+. cap set processors 8
+
+. clear*
+
+. set rmsg on
+r; t=0.00 21:32:14
+
+. global size 10000000
+r; t=0.00 21:32:14
+
+. global dims 5
+r; t=0.00 21:32:14
+
+. global reps 200
+r; t=0.00 21:32:14
+
+. 
+. set obs     $size
+number of observations (_N) was 0, now 10,000,000
+r; t=0.02 21:32:14
+
+. forval n = 1/$dims {
+  2. g i`n' = runiform()
+  3. }
+r; t=4.31 21:32:19
+
+. g dv = rbinomial(1,.3)
+r; t=1.60 21:32:20
+
+. memory
+
+  Memory usage
+                                            used                allocated
+    ---------------------------------------------------------------------
+    data                             240,000,000              301,989,888
+    strLs                                      0                        0
+    ---------------------------------------------------------------------
+    data & strLs                     240,000,000              301,989,888
+
+    ---------------------------------------------------------------------
+    data & strLs                     240,000,000              301,989,888
+    var. names, %fmts, ...                 1,954                   65,000
+    overhead                          21,004,344               21,005,080
+
+    Stata matrices                             0                        0
+    ado-files                              3,263                    3,263
+    stored results                             0                        0
+
+    Mata matrices                              0                        0
+    Mata functions                             0                        0
+
+    set maxvar usage                   5,281,738                5,281,738
+
+    other                                  3,379                    3,379
+    ---------------------------------------------------------------------
+    grand total                      266,290,862              328,348,348
+r; t=0.00 21:32:20
+
+. 
+. // r; m=logit
+. qui logit dv i*
+r; t=12.57 21:32:33
+
+. // r; m=xtmixed
+. qui xtmixed dv i*
+r; t=51.40 21:33:24
+
+. 
+. *with bootstrap:
+. // r; m=bootstrap
+. qui bs, reps($reps): logit dv i*
+r; t=9326.60 0:08:50
+
+. 
+. exit, clear
+
+end of do-file
+
+r; t=0.00 0:08:51
+
