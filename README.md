@@ -30,14 +30,14 @@ cat /proc/cpuinfo | grep "cpu MHz" | sort | tail -1
 
 # stata-performance
 
-- docker-vm-redcloud: Intel Core Processor (Haswell, no TSX, IBRS) 2295 MHz (8x)
-- workstation: Intel(R) Core(TM) i7 CPU         980  @ 3.33GHz
-- workstation2: AMD Ryzen 9 3900X 12-Core Processor @ 4251.968 MHz
-- cbsuecco02: Intel(R) Xeon(R) CPU E7- 8837  @ 2.67GHz
-- cbsuecco08: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
-- codeocean: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
-- rsch102: ?
-- rsch105: ?
+- docker-vm-redcloud: CAC Red Cloud, Intel Core Processor (Haswell, no TSX, IBRS) 2295 MHz (8x)
+- workstation: Personal workstation, 2011 vintage, Intel(R) Core(TM) i7 CPU         980  @ 3.33GHz
+- workstation2: Personal workstation, 2021 vintage, AMD Ryzen 9 3900X 12-Core Processor @ 4251.968 MHz
+- cbsuecco02: Dept-managed server, 2011 vintage, Intel(R) Xeon(R) CPU E7- 8837  @ 2.67GHz
+- cbsuecco08: Dept-managed server, 2028 vintage, Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
+- codeocean: CodeOcean.com on AWS (?), Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
+- rsch102: CISER-managed
+- rsch105: CISER-managed
 
 ## Results
 
